@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "titles" ALTER COLUMN "name_double" SET NOT NULL,
+ALTER COLUMN "name_double" SET DATA TYPE TEXT,
+ALTER COLUMN "name_triple" SET NOT NULL,
+ALTER COLUMN "name_triple" SET DATA TYPE TEXT;
