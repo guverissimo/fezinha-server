@@ -4,8 +4,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
 // const VALID_API_KEY = String(process.env.API_KEY); // Substitua pela sua API Key válida ou utilize uma variável de ambiente para armazená-la
-const VALID_API_KEY = "gusatscVYartyajhdyu123hsays"; 
-
+const VALID_API_KEY = "gusatscVYartyajhdyu123hsays";
 
 @Injectable()
 export class ApiKeyMiddleware implements NestMiddleware {
