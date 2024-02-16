@@ -5,9 +5,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateManyEditionsDto } from './dto/update-many.dto';
 import { FileUploadService } from 'src/s3/s3.service';
 import { getFilesS3 } from './helper/getFileS3';
-import { Title } from '@prisma/client';
-import { title } from 'process';
-import { number } from 'zod';
 
 @Injectable()
 export class EditionsService {
@@ -85,8 +82,8 @@ export class EditionsService {
         },
       });
 
-      const initialSecondRange = (Number(createEditionDto.initial_title_double_chance) + 100).toString()
-      const endSecondRange = (Number(createEditionDto.end_title_double_chance) + 100).toString()
+      const initialSecondRange = (Number(createEditionDto.initial_title_double_chance) + 500000).toString()
+      const endSecondRange = (Number(createEditionDto.end_title_double_chance) + 500000).toString()
      
 
       notExistsBaseTitleDoubleSecondChance =
@@ -95,11 +92,11 @@ export class EditionsService {
             AND: [
               {
                 name: {
-                  gte: `0000${initialSecondRange}`,
+                  gte: `0${initialSecondRange}`,
                 },
               },
               {
-                name: { lte: `0000${endSecondRange}` },
+                name: { lte: `0${endSecondRange}` },
               },
             ],
             NOT: {
@@ -114,9 +111,9 @@ export class EditionsService {
       console.log("mapDouble: ", mapDouble);
       
       notExistsBaseTitleDouble.forEach(title => {
-        const titleNumber = (Number(title.name) + 100).toString()
+        const titleNumber = (Number(title.name) + 500000).toString()
         console.log("titleNumber; ", titleNumber);
-        const titleDouble = mapDouble.get(`0000${titleNumber}`);
+        const titleDouble = mapDouble.get(`0${titleNumber}`);
         console.log("titleDouble: ", titleDouble);
         if (titleDouble) {
           title.name_double = titleDouble.name
@@ -148,8 +145,8 @@ export class EditionsService {
         },
       });
 
-      const initialSecondRange = (Number(createEditionDto.initial_title_triple_chance) + 100).toString()
-      const endSecondRange = (Number(createEditionDto.end_title_triple_chance) + 100).toString()
+      const initialSecondRange = (Number(createEditionDto.initial_title_triple_chance) + 500000).toString()
+      const endSecondRange = (Number(createEditionDto.end_title_triple_chance) + 500000).toString()
      
 
       notExistsBaseTitleTripleSecond =
@@ -158,11 +155,11 @@ export class EditionsService {
             AND: [
               {
                 name: {
-                  gte: `0000${initialSecondRange}`,
+                  gte: `0${initialSecondRange}`,
                 },
               },
               {
-                name: { lte: `0000${endSecondRange}` },
+                name: { lte: `0${endSecondRange}` },
               },
             ],
             NOT: {
@@ -173,8 +170,8 @@ export class EditionsService {
           },
       });
       
-      const initialThirdRange = (Number(createEditionDto.initial_title_triple_chance) + 200).toString()
-      const endThirdRange = (Number(createEditionDto.end_title_triple_chance) + 200).toString()
+      const initialThirdRange = (Number(createEditionDto.initial_title_triple_chance) + 1000000).toString()
+      const endThirdRange = (Number(createEditionDto.end_title_triple_chance) + 1000000).toString()
      
 
       notExistsBaseTitleTripleThird =
@@ -183,11 +180,11 @@ export class EditionsService {
             AND: [
               {
                 name: {
-                  gte: `0000${initialThirdRange}`,
+                  gte: `${initialThirdRange}`,
                 },
               },
               {
-                name: { lte: `0000${endThirdRange}` },
+                name: { lte: `${endThirdRange}` },
               },
             ],
             NOT: {
@@ -204,10 +201,10 @@ export class EditionsService {
 
       
       notExistsBaseTitleTriple.forEach(title => {
-        const titleNumber = (Number(title.name) + 100).toString()
-        const titleNumber3 = (Number(title.name) + 200).toString()
-        const titleDouble = mapTripleSecond.get(`0000${titleNumber}`);
-        const titleTriple = mapTripleThird.get(`0000${titleNumber3}`);
+        const titleNumber = (Number(title.name) + 500000).toString()
+        const titleNumber3 = (Number(title.name) + 1000000).toString()
+        const titleDouble = mapTripleSecond.get(`0${titleNumber}`);
+        const titleTriple = mapTripleThird.get(`${titleNumber3}`);
 
         if (titleDouble && titleTriple) {
           title.name_double = titleDouble.name
